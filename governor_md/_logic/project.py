@@ -5,22 +5,21 @@ from __future__ import annotations
 import os
 
 from ..core import VisionCore
-from ._session import get_registry, register, resolve
+from ._session import get_registry, register
 
 
 def project_init(
     project_name: str, path: str | None = None, backlog_path: str | None = None
 ) -> str:
     """Initialize governor in a project directory."""
-    abs_path = os.path.abspath(path) if path else None
-    if abs_path:
-        core = VisionCore(abs_path)
-    else:
-        core = resolve()
+    # init is a creation op: with no explicit --path, target CWD (per --help),
+    # never resolve() — there is no registered project yet, which is the whole
+    # point of init. Resolving here caused a circular init/set bootstrap error.
+    abs_path = os.path.abspath(path) if path else os.getcwd()
+    core = VisionCore(abs_path)
     core.init(project_name, backlog_path)
     pid = core.get_project_id()
-    if abs_path:
-        get_registry()[pid] = core
+    get_registry()[pid] = core
     return (
         f'Initialized governor for "{project_name}" at {core.root}\n'
         f"project_id: {pid}\n\n"
