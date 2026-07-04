@@ -1,6 +1,6 @@
 [project]
 name = "governor-md"
-version = "0.4.1"
+version = "0.4.2"
 description = "The static St. Peter — vision, goals, guardrails, SOPs, ADRs for AI agent governance"
 readme = "README.md"
 license = "MIT"
