@@ -38,7 +38,7 @@ jobs:
         run: pip install -e ".[dev]"
       - name: Smoke-test module import
         run: |
-          python -c "import governor_md; from governor_md.server import mcp; print('OK:', mcp.name)"
+          python -c "import governor_md; from governor_md.mcp_server import server, run; print('OK:', server.name)"
 
   build-verify:
     runs-on: ubuntu-latest
