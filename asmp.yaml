@@ -1,0 +1,39 @@
+asmp: "0.1"
+kind: service
+name: visionlog
+description: >
+  Legacy package name for governor-md (vision, goals, guardrails, ADRs).
+  Prefer governor-md. Kept registered so discovery by the historical Trilogy
+  name "visionlog" still resolves.
+version: 0.2.0
+created_by: agent://grok/software-engineer
+owner: eidos-agi
+section: tools
+
+aliases:
+  - visionlog-md
+
+runtime:
+  style: mcp
+  exec: governor-md
+  note: visionlog PyPI package now points at governor-md implementation
+
+capabilities:
+  provides:
+    - vision.governance
+    - trilogy.contract
+  requires:
+    - research-md
+
+infra:
+  repo: ~/repos-eidos-agi/visionlog
+  github: https://github.com/eidos-agi/visionlog.md
+  pypi: visionlog
+  install:
+    - pip install governor-md
+  superseded_by: governor-md
+
+display:
+  icon: gavel
+  label: visionlog (→ governor.md)
+  section: tools
